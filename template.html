@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	
+    <meta charset="UTF-8">
+    <title>ESA Questionnaire</title>
+    <style>
+	.tab {
+	  overflow: hidden;
+	  border: 1px solid #fff;
+	  background-color: #000;
+		}
+
+		/* Style the buttons inside the tab */
+		.tab button {
+		  background-color: inherit;
+		  float: left;
+		  border: none;
+		  outline: none;
+		  cursor: pointer;
+		  padding: 14px 16px;
+		  transition: 0.3s;
+		  color: #fff;
+		  font-size: 17px;
+		}
+
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+		  background-color: #000;
+		  color: #fff;
+		  font-weight:bold;
+		}
+
+		/* Create an active/current tablink class */
+		.tab button.active {
+		  background-color: #fff;
+		  color: #000;
+		  font-weight:bold;
+
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+		  display: none;
+		  padding: 6px 12px;
+		  border: 1px solid #fff;
+		  border-top: none;
+		  background-color: #000;
+		}
+	
+	.center {
+		  display: block;
+		  margin-left: auto;
+		  margin-right: auto;
+		  width: 30%;
+		}
+		
+	.column {
+		  float: left;
+		  line-height:50px;
+		  width: 15%;
+		}
+	.column_wide {
+		  float: right;
+		  width: 80%;
+		}
+    body {
+        background-color: #000;
+        }
+    label  {
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        margin-left: 40px;
+        }
+	h4 {
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 100px;
+        }
+	h5 {
+		color: #fff;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 15px;
+		margin-left: 100px;
+		}
+	
+	input[type="text1"], textarea {
+		background-color :  #fff; 
+		color: #000;
+		font-weight: bold;
+		outline-color:#000;
+		border-color:#000;
+	}
+	
+	input[type="date"], date {
+		background-color :  #fff; 
+		color: #000;
+		font-weight: bold;
+		outline-color:#000;
+		border-color:#000;
+	}
+	
+	input[type="textarea"], textarea {
+		background-color :  #fff; 
+		width: 60%;
+		height:100px;
+		color: #000;
+		font-weight: bold;
+		outline-color:#000;
+		border-color:#000;
+		inline-size: 95%;
+        overflow-wrap: break-word;
+	}
+	 	
+     input {
+        color: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 20px;
+        }
+		
+	button {
+	  border-radius: 4px;
+	  background-color: #fff;
+	  border: none;
+	  color: #000;
+	  text-align: center;
+	  font-size: 14px;
+	  padding: 16px;
+	  width: 220px;
+	  transition: all 0.5s;
+	  cursor: pointer;
+	  margin: 36px;
+	  box-shadow: 0 10px 20px -8px rgba(255, 153, 0,.3);
+	}
+
+button:hover{
+  padding-right: 24px;
+  padding-left:8px;
+  font-weight:bold;
+}
+
+    </style>
+    <script>
+        var callAPI = (aalias,simid,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14)=>{
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"aalias":aalias,
+									  "simid":simid,
+									  "q1":q1,
+									  "q2":q2,
+									  "q3":q3,
+									  "q4":q4,
+									  "q5":q5,
+									  "q6":q6,
+									  "q7":q7,
+									  "q8":q8,
+									  "q9":q9,
+									  "q10":q10,
+									  "q11":q11,
+									  "q12":q12,
+									  "q13":q13,
+									  "q14":q14
+									  });
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("<INVOKE API URL>", requestOptions)
+            .then(response => response.text())
+            .then(result => alert(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+        }
+		
+		
+		function changeTab(evt, tabName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(tabName).style.display = "block";
+		  evt.currentTarget.className += " active";
+}
+    </script>
+</head>
+<body>
+<div class="tab">
+  <button class="tablinks" onclick="changeTab(event, 'Home')">Home</button>
+  <button class="tablinks" onclick="changeTab(event, 'Form')">Questionnaire</button>
+</div>
+<div id="Home" class="tabcontent" style="display:block">
+	<h4> Please fill out this questionnaire and submit the form! </h4>
+	<img src="https://i.imgur.com/KSAYqOg.gif" alt="Dynamo"  width="500" class="center" onclick="changeTab(event, 'Form')"/>
+</div> 
+<div id="Form" class="tabcontent">
+      <form>
+        <label>User :</label> <br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text1" id="aalias"> <br>
+        <label> Ticket Number:</label> <br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text1" id="simid"> <br>
+		<br>
+      </form>
+	  <form>
+	  
+        <label>Q1:</label><br>
+		<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="q1" name="q1" value="Yes">
+		<label for="yes">Yes</label><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="q1" name="q1" value="No">
+		<label for="no">No</label><br>
+		<br>
+		
+        <label>Q2:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="q2"><br>
+		<br>
+		
+		<label>Q3:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="q3"></textarea><br>
+		<br>
+		
+        <label>Q4:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="q4"></textarea><br>
+		<br>
+		
+		<label>Q5:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="q5"></textarea><br>
+		<br>
+		
+        <label>Q6:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q6"></textarea><br>
+		<br>
+		
+	    <label>Q7:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q7"></textarea><br>
+		<br>
+		
+        <label>Q8:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q8"></textarea><br>
+		<br>
+		
+		<label>Q9:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q9"></textarea><br>
+		<br>
+		
+        <label>Q10:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q10"></textarea><br>
+		<br>
+		
+		<label>Q11:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q11"></textarea><br>
+		<br>
+		
+        <label>Q12:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q12"></textarea><br>
+		<br>
+		
+		<label>Q13:</label><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q13"></textarea><br>
+		<br>
+		
+        <label>Q14:</label></textarea><br>
+		<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea  id="q14"></textarea><br>
+		<br>
+		
+      </form>
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="callAPI(document.getElementById('aalias').value,
+																		   document.getElementById('simid').value,
+																		   document.getElementById('q1').value,
+																		   document.getElementById('q2').value,
+																		   document.getElementById('q3').value,
+																		   document.getElementById('q4').value,
+																		   document.getElementById('q5').value,
+																		   document.getElementById('q6').value,
+																		   document.getElementById('q7').value,
+																		   document.getElementById('q8').value,
+																		   document.getElementById('q9').value,
+																		   document.getElementById('q10').value,
+																		   document.getElementById('q11').value,
+																		   document.getElementById('q12').value,
+																		   document.getElementById('q13').value,
+																		   document.getElementById('q14').value)">Submit</button>
+
+</div> 
+</body>
+</html>
