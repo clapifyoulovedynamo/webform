@@ -3,7 +3,7 @@ import boto3
 from time import gmtime, strftime
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('esa_db_test')
+table = dynamodb.Table('<YOUR TABLE NAME>')
 
 def lambda_handler(event, context):
     response = table.put_item(
